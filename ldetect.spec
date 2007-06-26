@@ -3,10 +3,11 @@
 %define lib_major 0.7
 %define lib_minor 2
 %define lib_name %mklibname %{name} %{lib_major}
+%define develname %mklibname %name -d
 
 Name:    ldetect
 Version: %{lib_major}.%{lib_minor}
-Release: %mkrel 1.1
+Release: %mkrel 2
 Summary: Light hardware detection tool
 Source: %{name}-%{version}.tar.bz2
 Group: System/Kernel and hardware
@@ -22,19 +23,20 @@ Requires: ldetect-lst common-licenses
 Requires: pciids
 Group: System/Libraries
 
-%package -n %{lib_name}-devel
+%package -n %develname
 Summary: Development package for ldetect
 Requires: %{lib_name} = %{version}
 Provides: ldetect-devel = %version, libldetect-devel = %version
 Obsoletes: ldetect-devel
 Group: Development/C
 Conflicts: %{mklibname ldetect 0.6}-devel
+Obsoletes: %mklibname %name 0.7 -d
 
 %description
 The hardware device lists provided by this package are used as lookup 
 table to get hardware autodetection
 
-%description -n %{lib_name}-devel
+%description -n %develname
 see %name
 
 %description -n %{lib_name}
@@ -66,7 +68,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 %_libdir/*.so.*
 
-%files -n %{lib_name}-devel
+%files -n %develname
 %defattr(-,root,root)
 %doc ChangeLog
 %_includedir/*
