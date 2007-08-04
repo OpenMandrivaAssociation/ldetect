@@ -1,19 +1,19 @@
 # EDIT IN SVN NOT IN SOURCE PACKAGE (NO PATCH ALLOWED).
 
 %define lib_major 0.7
-%define lib_minor 2
+%define lib_minor 3
 %define lib_name %mklibname %{name} %{lib_major}
 %define develname %mklibname %name -d
 
 Name:    ldetect
 Version: %{lib_major}.%{lib_minor}
-Release: %mkrel 3
+Release: %mkrel 1
 Summary: Light hardware detection tool
 Source: %{name}-%{version}.tar.bz2
 Group: System/Kernel and hardware
 URL:	  http://www.mandrivalinux.com
 BuildRoot: %_tmppath/%{name}-buildroot
-BuildRequires: usbutils => 0.11-2mdk pciutils-devel zlib-devel
+BuildRequires: usbutils => 0.11-2mdk pciutils-devel zlib-devel modprobe-devel
 Conflicts: drakxtools < 9.2-0.32mdk
 License: GPL
 
