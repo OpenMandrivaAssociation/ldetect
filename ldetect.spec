@@ -7,13 +7,14 @@
 
 Name:    ldetect
 Version: %{lib_major}.%{lib_minor}
-Release: %mkrel 2
+Release: %mkrel 3
 Summary: Light hardware detection tool
 Source: %{name}-%{version}.tar.bz2
 Group: System/Kernel and hardware
 URL:	  http://www.mandrivalinux.com
 BuildRoot: %_tmppath/%{name}-buildroot
-BuildRequires: usbutils => 0.11-2mdk pciutils-devel zlib-devel module-init-tools-devel
+BuildRequires: usbutils => 0.11-2mdk pciutils-devel zlib-devel
+BuildRequires: module-init-tools-devel >= 3.3-pre11.14mdv
 Conflicts: drakxtools < 9.2-0.32mdk
 License: GPL
 
