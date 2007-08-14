@@ -5,9 +5,11 @@
 %define lib_name %mklibname %{name} %{lib_major}
 %define develname %mklibname %name -d
 
+%define build_diet 1
+
 Name:    ldetect
 Version: %{lib_major}.%{lib_minor}
-Release: %mkrel 1
+Release: %mkrel 2
 Summary: Light hardware detection tool
 Source: %{name}-%{version}.tar.bz2
 Group: System/Kernel and hardware
@@ -15,6 +17,9 @@ URL:	  http://www.mandrivalinux.com
 BuildRoot: %_tmppath/%{name}-buildroot
 BuildRequires: usbutils => 0.11-2mdk pciutils-devel zlib-devel
 BuildRequires: modprobe-devel
+%if %{build_diet}
+BuildRequires: dietlibc-devel
+%endif
 Conflicts: drakxtools < 9.2-0.32mdk
 License: GPL
 
@@ -47,11 +52,20 @@ see %name
 %setup -q
 
 %build
+%if %{build_diet}
+%make CFLAGS="-O2" CC="diet gcc" libldetect.a
+cp libldetect.a libldetect-diet.a
+make clean
+%endif
 %make
 
 %install
 rm -rf $RPM_BUILD_ROOT
 %makeinstall
+%if %{build_diet}
+install -d $RPM_BUILD_ROOT%{_prefix}/lib/dietlibc/lib-%{_arch}
+install libldetect-diet.a $RPM_BUILD_ROOT%{_prefix}/lib/dietlibc/lib-%{_arch}/libldetect.a
+%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -74,6 +88,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc ChangeLog
 %_includedir/*
 %_libdir/*.a
+%if %{build_diet}
+%{_prefix}/lib/dietlibc/lib-%{_arch}/libldetect.a
+%endif
 %_libdir/*.so
 
 
