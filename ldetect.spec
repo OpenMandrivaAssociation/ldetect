@@ -73,6 +73,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 %doc ChangeLog
 %_includedir/*
+%_libdir/*.a
 %_libdir/*.so
 
 
