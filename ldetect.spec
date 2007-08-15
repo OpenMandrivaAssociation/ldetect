@@ -53,7 +53,7 @@ see %name
 
 %build
 %if %{build_diet}
-%make CFLAGS="-O2" CC="diet gcc" libldetect.a
+%make CFLAGS="-Os" CC="diet gcc" libldetect.a
 cp libldetect.a libldetect-diet.a
 make clean
 %endif
