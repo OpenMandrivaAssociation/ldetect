@@ -14,7 +14,6 @@ Summary: Light hardware detection tool
 Source: %{name}-%{version}.tar.bz2
 Group: System/Kernel and hardware
 URL:	  http://www.mandrivalinux.com
-BuildRoot: %_tmppath/%{name}-buildroot
 BuildRequires: usbutils => 0.11-2mdk pciutils-devel zlib-devel
 BuildRequires: modprobe-devel
 %if %{build_diet}
