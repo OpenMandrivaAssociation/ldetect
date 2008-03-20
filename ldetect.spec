@@ -1,7 +1,7 @@
 # EDIT IN SVN NOT IN SOURCE PACKAGE (NO PATCH ALLOWED).
 
 %define lib_major 0.7
-%define lib_minor 23
+%define lib_minor 24
 %define lib_name %mklibname %{name} %{lib_major}
 %define develname %mklibname %name -d
 
