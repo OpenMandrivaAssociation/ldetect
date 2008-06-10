@@ -9,12 +9,12 @@
 
 Name:    ldetect
 Version: %{lib_major}.%{lib_minor}
-Release: %mkrel 1
+Release: %mkrel 2
 Summary: Light hardware detection tool
 Source: %{name}-%{version}.tar.bz2
 Group: System/Kernel and hardware
 URL:	  http://www.mandrivalinux.com
-BuildRoot: %_tmppath/%{name}-buildroot
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: usbutils => 0.11-2mdk pciutils-devel => 3.0.0-4mdv zlib-devel
 BuildRequires: modprobe-devel
 %if %{build_diet}
