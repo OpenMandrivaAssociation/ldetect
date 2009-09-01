@@ -28,7 +28,7 @@ Summary: Light hardware detection library
 Requires: ldetect-lst common-licenses
 Requires: pciids
 # (tv) fix upgrade ordering (libpci3 needs to be updaded from 3.0 to 3.1 before ldetect is upgraded):
-Requires: %mklibname pci 3 >= 3.1
+Requires: %{mklibname pci 3} >= 3.1
 Group: System/Libraries
 
 %package -n %develname
