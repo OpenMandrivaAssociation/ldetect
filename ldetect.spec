@@ -1,7 +1,7 @@
 # EDIT IN SVN NOT IN SOURCE PACKAGE (NO PATCH ALLOWED).
 
 %define lib_major 0.8
-%define lib_minor 4
+%define lib_minor 5
 %define lib_name %mklibname %{name} %{lib_major}
 %define develname %mklibname %name -d
 
@@ -9,7 +9,7 @@
 
 Name:    ldetect
 Version: %{lib_major}.%{lib_minor}
-Release: %mkrel 4
+Release: %mkrel 5
 Summary: Light hardware detection tool
 Source: %{name}-%{version}.tar.bz2
 Group: System/Kernel and hardware
