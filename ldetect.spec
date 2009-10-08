@@ -9,7 +9,7 @@
 
 Name:    ldetect
 Version: %{lib_major}.%{lib_minor}
-Release: %mkrel 2
+Release: %mkrel 3
 Summary: Light hardware detection tool
 Source: %{name}-%{version}.tar.bz2
 Group: System/Kernel and hardware
@@ -28,7 +28,7 @@ Summary: Light hardware detection library
 Requires: ldetect-lst common-licenses
 Requires: pciids
 # (tv) fix upgrade ordering (libpci3 needs to be updaded from 3.0 to 3.1 before ldetect is upgraded):
-Requires: %{mklibname pci 3} >= 3.1
+Requires: %{mklibname pci 3} >= 3.1.4-3mdv2010.0
 Group: System/Libraries
 
 %package -n %develname
