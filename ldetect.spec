@@ -42,8 +42,8 @@ Conflicts: %{mklibname ldetect 0.6}-devel
 Obsoletes: %mklibname %name 0.7 -d
 
 %description
-The hardware device lists provided by this package are used as lookup 
-table to get hardware autodetection
+The hardware device lists provided by this package are used as a lookup 
+table to get hardware auto-detection.
 
 %description -n %develname
 see %name
