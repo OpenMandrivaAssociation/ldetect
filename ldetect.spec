@@ -9,7 +9,7 @@
 
 Name:    ldetect
 Version: %{lib_major}.%{lib_minor}
-Release: %mkrel 4
+Release: %mkrel 5
 Summary: Light hardware detection tool
 Source: %{name}-%{version}.tar.bz2
 Group: System/Kernel and hardware
