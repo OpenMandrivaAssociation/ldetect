@@ -63,15 +63,15 @@ make clean
 %make
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 %makeinstall
 %if %{build_diet}
-install -d $RPM_BUILD_ROOT%{_prefix}/lib/dietlibc/lib-%{_arch}
-install libldetect-diet.a $RPM_BUILD_ROOT%{_prefix}/lib/dietlibc/lib-%{_arch}/libldetect.a
+install -d %{buildroot}%{_prefix}/lib/dietlibc/lib-%{_arch}
+install libldetect-diet.a %{buildroot}%{_prefix}/lib/dietlibc/lib-%{_arch}/libldetect.a
 %endif
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %if %mdkversion < 200900
 %post -n %{lib_name} -p /sbin/ldconfig
