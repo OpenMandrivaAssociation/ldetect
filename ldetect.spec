@@ -5,7 +5,7 @@
 %define	libname	%mklibname %{name} %{major}
 %define	devname	%mklibname %{name} -d
 
-%define build_diet 1
+%bcond_without	diet
 
 Name:    	ldetect
 Version:	%{major}.%{minor}
@@ -16,7 +16,7 @@ Group:		System/Kernel and hardware
 URL:		http://www.mandrivalinux.com
 BuildRequires:	usbutils => 0.11-2mdk pciutils-devel => 3.0.0-4mdv zlib-devel
 BuildRequires:	modprobe-devel
-%if %{build_diet}
+%if %{with diet}
 BuildRequires:	dietlibc-devel
 %endif
 Conflicts:	drakxtools < 9.2-0.32mdk
@@ -51,7 +51,7 @@ see %{name}
 %setup -q
 
 %build
-%if %{build_diet}
+%if %{with diet}
 %make CFLAGS="-Os -D_BSD_SOURCE -D_FILE_OFFSET_BITS=64" CC="diet gcc" libldetect.a
 cp libldetect.a libldetect-diet.a
 make clean
@@ -59,9 +59,8 @@ make clean
 %make
 
 %install
-rm -rf %{buildroot}
 %makeinstall
-%if %{build_diet}
+%if %{with diet}
 install -d %{buildroot}%{_prefix}/lib/dietlibc/lib-%{_arch}
 install libldetect-diet.a %{buildroot}%{_prefix}/lib/dietlibc/lib-%{_arch}/libldetect.a
 %endif
@@ -77,7 +76,7 @@ install libldetect-diet.a %{buildroot}%{_prefix}/lib/dietlibc/lib-%{_arch}/libld
 %doc ChangeLog
 %{_includedir}/*
 %{_libdir}/*.a
-%if %{build_diet}
+%if %{with diet}
 %{_prefix}/lib/dietlibc/lib-%{_arch}/libldetect.a
 %endif
 %{_libdir}/*.so
