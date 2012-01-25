@@ -15,7 +15,7 @@ Source0:	%{name}-%{version}.tar.xz
 Group:		System/Kernel and hardware
 URL:		http://www.mandrivalinux.com
 BuildRequires:	usbutils pkgconfig(libpci) pkgconfig(zlib)
-BuildRequires:	modprobe-devel
+BuildRequires:	pkgconfig(kmod)
 %if %{with diet}
 BuildRequires:	dietlibc-devel
 %endif
