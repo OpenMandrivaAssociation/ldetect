@@ -1,11 +1,12 @@
 # EDIT IN SVN NOT IN SOURCE PACKAGE (NO PATCH ALLOWED).
 
 %define	major	0.12
-%define	minor	1
+%define	minor	2
 %define	libname	%mklibname %{name} %{major}
 %define	devname	%mklibname %{name} -d
 
-%bcond_without	diet
+%bcond_with	diet
+%bcond_without	uclibc
 
 Name:    	ldetect
 Version:	%{major}.%{minor}
@@ -18,6 +19,9 @@ BuildRequires:	usbutils pkgconfig(libpci) pkgconfig(zlib)
 BuildRequires:	pkgconfig(libkmod)
 %if %{with diet}
 BuildRequires:	dietlibc-devel
+%endif
+%if %{with uclibc}
+BuildRequires:	uClibc-devel
 %endif
 License:	GPLv2+
 
@@ -55,13 +59,22 @@ see %{name}
 cp libldetect.a libldetect-diet.a
 make clean
 %endif
+
+%if %{with uclibc}
+%make CFLAGS="%{uclibc_cflags}" LDFLAGS="%{?ldflags}" CC="%{uclibc_cc}"
+cp libldetect.a libldetect-uclibc.a
+make clean
+%endif
+
 %make
 
 %install
 %makeinstall
 %if %{with diet}
-install -d %{buildroot}%{_prefix}/lib/dietlibc/lib-%{_arch}
-install libldetect-diet.a %{buildroot}%{_prefix}/lib/dietlibc/lib-%{_arch}/libldetect.a
+install libldetect-diet.a -D %{buildroot}%{_prefix}/lib/dietlibc/lib-%{_arch}/libldetect.a
+%endif
+%if %{with uclibc}
+install libldetect-uclibc.a -D %{buildroot}%{uclibc_root}%{_libdir}/libldetect.a
 %endif
 
 %files
@@ -69,6 +82,7 @@ install libldetect-diet.a %{buildroot}%{_prefix}/lib/dietlibc/lib-%{_arch}/libld
 %{_bindir}/*
 
 %files -n %{libname}
+%{_libdir}/*.so.%{major}
 %{_libdir}/*.so.%{major}.%{minor}
 
 %files -n %{devname}
@@ -77,5 +91,8 @@ install libldetect-diet.a %{buildroot}%{_prefix}/lib/dietlibc/lib-%{_arch}/libld
 %{_libdir}/*.a
 %if %{with diet}
 %{_prefix}/lib/dietlibc/lib-%{_arch}/libldetect.a
+%endif
+%if %{with uclibc}
+%{uclibc_root}%{_libdir}/libldetect.a
 %endif
 %{_libdir}/*.so
