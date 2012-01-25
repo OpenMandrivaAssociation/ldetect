@@ -32,7 +32,7 @@ Requires:	ldetect-lst common-licenses
 Requires:	pciids
 # (tv) fix upgrade ordering (libpci3 needs to be updaded from 3.0 to 3.1 before ldetect is upgraded):
 # (tv) and require a lib w/o double free:
-Requires:	%{mklibname pci 3} >= 3.1.4-3mdv2010.0
+Conflicts:	%{mklibname pci 3} < 3.1.4-3mdv2010.0
 
 %description -n %{libname}
 see %{name}
