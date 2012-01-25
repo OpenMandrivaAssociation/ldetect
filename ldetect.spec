@@ -14,7 +14,7 @@ Summary:	Light hardware detection tool
 Source0:	%{name}-%{version}.tar.xz
 Group:		System/Kernel and hardware
 URL:		http://www.mandrivalinux.com
-BuildRequires:	usbutils => 0.11-2mdk pciutils-devel => 3.0.0-4mdv zlib-devel
+BuildRequires:	usbutils pkgconfig(libpci) pkgconfig(zlib)
 BuildRequires:	modprobe-devel
 %if %{with diet}
 BuildRequires:	dietlibc-devel
