@@ -1,55 +1,51 @@
 # EDIT IN SVN NOT IN SOURCE PACKAGE (NO PATCH ALLOWED).
 
-%define lib_major 0.12
-%define lib_minor 1
-%define lib_name %mklibname %{name} %{lib_major}
-%define develname %mklibname %name -d
+%define	major	0.12
+%define	minor	1
+%define	libname	%mklibname %{name} %{major}
+%define	devname	%mklibname %{name} -d
 
 %define build_diet 1
 
-Name:    ldetect
-Version: %{lib_major}.%{lib_minor}
-Release: 1
-Summary: Light hardware detection tool
-Source: %{name}-%{version}.tar.xz
-Group: System/Kernel and hardware
-URL:	  http://www.mandrivalinux.com
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires: usbutils => 0.11-2mdk pciutils-devel => 3.0.0-4mdv zlib-devel
-BuildRequires: modprobe-devel
+Name:    	ldetect
+Version:	%{major}.%{minor}
+Release:	1
+Summary:	Light hardware detection tool
+Source0:	%{name}-%{version}.tar.xz
+Group:		System/Kernel and hardware
+URL:		http://www.mandrivalinux.com
+BuildRequires:	usbutils => 0.11-2mdk pciutils-devel => 3.0.0-4mdv zlib-devel
+BuildRequires:	modprobe-devel
 %if %{build_diet}
-BuildRequires: dietlibc-devel
+BuildRequires:	dietlibc-devel
 %endif
-Conflicts: drakxtools < 9.2-0.32mdk
-License: GPL
-
-%package -n %{lib_name}
-Summary: Light hardware detection library
-Requires: ldetect-lst common-licenses
-Requires: pciids
-# (tv) fix upgrade ordering (libpci3 needs to be updaded from 3.0 to 3.1 before ldetect is upgraded):
-# (tv) and require a lib w/o double free:
-Requires: %{mklibname pci 3} >= 3.1.4-3mdv2010.0
-Group: System/Libraries
-
-%package -n %develname
-Summary: Development package for ldetect
-Requires: %{lib_name} = %{version}
-Provides: ldetect-devel = %version, libldetect-devel = %version
-Obsoletes: ldetect-devel
-Group: Development/C
-Conflicts: %{mklibname ldetect 0.6}-devel
-Obsoletes: %mklibname %name 0.7 -d
+Conflicts:	drakxtools < 9.2-0.32mdk
+License:	GPL
 
 %description
 The hardware device lists provided by this package are used as a lookup 
 table to get hardware auto-detection.
 
-%description -n %develname
-see %name
+%package -n	%{libname}
+Summary:	Light hardware detection library
+Group:		System/Libraries
+Requires:	ldetect-lst common-licenses
+Requires:	pciids
+# (tv) fix upgrade ordering (libpci3 needs to be updaded from 3.0 to 3.1 before ldetect is upgraded):
+# (tv) and require a lib w/o double free:
+Requires:	%{mklibname pci 3} >= 3.1.4-3mdv2010.0
 
-%description -n %{lib_name}
-see %name
+%description -n %{libname}
+see %{name}
+
+%package -n	%{devname}
+Group:		Development/C
+Summary:	Development package for ldetect
+Requires:	%{libname} = %{EVRD}
+Provides:	ldetect-devel = %{EVRD}
+
+%description -n %{devname}
+see %{name}
 
 %prep
 %setup -q
@@ -70,34 +66,18 @@ install -d %{buildroot}%{_prefix}/lib/dietlibc/lib-%{_arch}
 install libldetect-diet.a %{buildroot}%{_prefix}/lib/dietlibc/lib-%{_arch}/libldetect.a
 %endif
 
-%clean
-rm -rf %{buildroot}
-
-%if %mdkversion < 200900
-%post -n %{lib_name} -p /sbin/ldconfig
-%endif
-
-%if %mdkversion < 200900
-%postun -n %{lib_name} -p /sbin/ldconfig
-%endif
-
 %files
-%defattr(-,root,root)
 %doc AUTHORS
-%_bindir/*
+%{_bindir}/*
 
-%files -n %{lib_name}
-%defattr(-,root,root)
-%_libdir/*.so.*
+%files -n %{libname}
+%{_libdir}/*.so.%{major}.%{minor}
 
-%files -n %develname
-%defattr(-,root,root)
+%files -n %{devname}
 %doc ChangeLog
-%_includedir/*
-%_libdir/*.a
+%{_includedir}/*
+%{_libdir}/*.a
 %if %{build_diet}
 %{_prefix}/lib/dietlibc/lib-%{_arch}/libldetect.a
 %endif
-%_libdir/*.so
-
-
+%{_libdir}/*.so
