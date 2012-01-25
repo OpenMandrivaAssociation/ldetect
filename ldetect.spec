@@ -1,6 +1,6 @@
 # EDIT IN SVN NOT IN SOURCE PACKAGE (NO PATCH ALLOWED).
 
-%define lib_major 0.11
+%define lib_major 0.12
 %define lib_minor 1
 %define lib_name %mklibname %{name} %{lib_major}
 %define develname %mklibname %name -d
@@ -9,9 +9,9 @@
 
 Name:    ldetect
 Version: %{lib_major}.%{lib_minor}
-Release: %mkrel 5
+Release: 1
 Summary: Light hardware detection tool
-Source: %{name}-%{version}.tar.bz2
+Source: %{name}-%{version}.tar.xz
 Group: System/Kernel and hardware
 URL:	  http://www.mandrivalinux.com
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
