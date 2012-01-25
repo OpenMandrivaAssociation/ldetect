@@ -19,7 +19,6 @@ BuildRequires:	modprobe-devel
 %if %{with diet}
 BuildRequires:	dietlibc-devel
 %endif
-Conflicts:	drakxtools < 9.2-0.32mdk
 License:	GPLv2+
 
 %description
