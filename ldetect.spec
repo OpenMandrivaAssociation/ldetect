@@ -20,7 +20,7 @@ BuildRequires:	modprobe-devel
 BuildRequires:	dietlibc-devel
 %endif
 Conflicts:	drakxtools < 9.2-0.32mdk
-License:	GPL
+License:	GPLv2+
 
 %description
 The hardware device lists provided by this package are used as a lookup 
