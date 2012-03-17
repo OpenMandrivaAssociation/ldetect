@@ -1,7 +1,8 @@
 # EDIT IN SVN NOT IN SOURCE PACKAGE (NO PATCH ALLOWED).
+%define Werror_cflags %nil
 
 %define	major	0.12
-%define	minor	2
+%define	minor	1
 %define	libname	%mklibname %{name} %{major}
 %define	devname	%mklibname %{name} -d
 
@@ -12,18 +13,21 @@ Name:    	ldetect
 Version:	%{major}.%{minor}
 Release:	1
 Summary:	Light hardware detection tool
-Source0:	%{name}-%{version}.tar.xz
 Group:		System/Kernel and hardware
+License:	GPLv2+
 URL:		http://www.mandrivalinux.com
-BuildRequires:	usbutils pkgconfig(libpci) pkgconfig(zlib)
+Source0:	%{name}-%{version}.tar.xz
+Patch0:		ldetect-0.12.1_modalias_kmod.patch
+BuildRequires:	usbutils
 BuildRequires:	pkgconfig(libkmod)
+BuildRequires:	pkgconfig(libpci)
+BuildRequires:	pkgconfig(zlib)
 %if %{with diet}
 BuildRequires:	dietlibc-devel
 %endif
 %if %{with uclibc}
 BuildRequires:	uClibc-devel
 %endif
-License:	GPLv2+
 
 %description
 The hardware device lists provided by this package are used as a lookup 
@@ -32,7 +36,8 @@ table to get hardware auto-detection.
 %package -n	%{libname}
 Summary:	Light hardware detection library
 Group:		System/Libraries
-Requires:	ldetect-lst common-licenses
+Requires:	ldetect-lst
+Requires:	common-licenses
 Requires:	pciids
 # (tv) fix upgrade ordering (libpci3 needs to be updaded from 3.0 to 3.1 before ldetect is upgraded):
 # (tv) and require a lib w/o double free:
@@ -52,6 +57,7 @@ see %{name}
 
 %prep
 %setup -q
+%apply_patches
 
 %build
 %if %{with diet}
