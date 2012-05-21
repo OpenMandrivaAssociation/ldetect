@@ -9,15 +9,16 @@
 %bcond_with	diet
 %bcond_without	uclibc
 
-Name:    	ldetect
+Name:		ldetect
 Version:	%{major}.%{minor}
-Release:	1
+Release:	2
 Summary:	Light hardware detection tool
 Group:		System/Kernel and hardware
 License:	GPLv2+
 URL:		http://www.mandrivalinux.com
 Source0:	%{name}-%{version}.tar.xz
 Patch0:		ldetect-0.12.1_modalias_kmod.patch
+Patch1:		ldetect-0.12.1-pci.patch
 BuildRequires:	usbutils
 BuildRequires:	pkgconfig(libkmod)
 BuildRequires:	pkgconfig(libpci)
