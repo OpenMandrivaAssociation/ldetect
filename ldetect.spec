@@ -2,7 +2,7 @@
 %define Werror_cflags %nil
 
 %define	major	0.12
-%define	minor	1
+%define	minor	2
 %define	libname	%mklibname %{name} %{major}
 %define	devname	%mklibname %{name} -d
 
@@ -11,14 +11,12 @@
 
 Name:		ldetect
 Version:	%{major}.%{minor}
-Release:	2
+Release:	1
 Summary:	Light hardware detection tool
 Group:		System/Kernel and hardware
 License:	GPLv2+
 URL:		http://www.mandrivalinux.com
 Source0:	%{name}-%{version}.tar.xz
-Patch0:		ldetect-0.12.1_modalias_kmod.patch
-Patch1:		ldetect-0.12.1-pci.patch
 BuildRequires:	usbutils
 BuildRequires:	pkgconfig(libkmod)
 BuildRequires:	pkgconfig(libpci)
@@ -58,9 +56,9 @@ see %{name}
 
 %prep
 %setup -q
-%apply_patches
 
 %build
+make clean
 %if %{with diet}
 %make CFLAGS="-Os -D_BSD_SOURCE -D_FILE_OFFSET_BITS=64" CC="diet gcc" libldetect.a
 cp libldetect.a libldetect-diet.a
