@@ -57,18 +57,31 @@ see %{name}
 %prep
 %setup -q
 
-%build
-make clean
 %if %{with diet}
-%make CFLAGS="-Os -D_BSD_SOURCE -D_FILE_OFFSET_BITS=64" CC="diet gcc" libldetect.a
-cp libldetect.a libldetect-diet.a
-make clean
+mkdir -p diet
+pushd diet
+ln -s ../* .
+popd
 %endif
 
 %if %{with uclibc}
+mkdir -p uclibc
+pushd uclibc
+ln -s ../* .
+popd
+%endif
+
+%build
+%if %{with diet}
+pushd diet
+%make CFLAGS="-Os -D_BSD_SOURCE -D_FILE_OFFSET_BITS=64" CC="diet gcc" libldetect.a
+popd
+%endif
+
+%if %{with uclibc}
+pushd uclibc
 %make CFLAGS="%{uclibc_cflags}" LDFLAGS="%{?ldflags}" CC="%{uclibc_cc}"
-cp libldetect.a libldetect-uclibc.a
-make clean
+popd
 %endif
 
 %make
@@ -76,10 +89,10 @@ make clean
 %install
 %makeinstall
 %if %{with diet}
-install libldetect-diet.a -D %{buildroot}%{_prefix}/lib/dietlibc/lib-%{_arch}/libldetect.a
+install -m644 diet/libldetect.a -D %{buildroot}%{_prefix}/lib/dietlibc/lib-%{_arch}/libldetect.a
 %endif
 %if %{with uclibc}
-install libldetect-uclibc.a -D %{buildroot}%{uclibc_root}%{_libdir}/libldetect.a
+install -m644 uclibc/libldetect.a -D %{buildroot}%{uclibc_root}%{_libdir}/libldetect.a
 %endif
 
 %files
