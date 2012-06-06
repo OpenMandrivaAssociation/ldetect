@@ -45,6 +45,17 @@ Conflicts:	%{mklibname pci 3} < 3.1.4-3mdv2010.0
 %description -n %{libname}
 see %{name}
 
+%if %{with uclibc}
+%package -n	uclibc-%{libname}
+Summary:	Light hardware detection library linked against uClibc
+Group:		System/Libraries
+Requires:	ldetect-lst
+Requires:	pciids
+
+%description -n %{libname}
+see %{name}
+%endif
+
 %package -n	%{devname}
 Group:		Development/C
 Summary:	Development package for ldetect
@@ -93,6 +104,7 @@ install -m644 diet/libldetect.a -D %{buildroot}%{_prefix}/lib/dietlibc/lib-%{_ar
 %endif
 %if %{with uclibc}
 install -m644 uclibc/libldetect.a -D %{buildroot}%{uclibc_root}%{_libdir}/libldetect.a
+cp -a uclibc/libldetect.so* %{buildroot}%{uclibc_root}%{_libdir}/
 %endif
 
 %files
@@ -103,6 +115,12 @@ install -m644 uclibc/libldetect.a -D %{buildroot}%{uclibc_root}%{_libdir}/liblde
 %{_libdir}/*.so.%{major}
 %{_libdir}/*.so.%{major}.%{minor}
 
+%if %{with uclibc}
+%files -n uclibc-%{libname}
+%{uclibc_root}%{_libdir}/*.so.%{major}
+%{uclibc_root}%{_libdir}/*.so.%{major}.%{minor}
+%endif
+
 %files -n %{devname}
 %doc ChangeLog
 %{_includedir}/*
@@ -112,5 +130,6 @@ install -m644 uclibc/libldetect.a -D %{buildroot}%{uclibc_root}%{_libdir}/liblde
 %endif
 %if %{with uclibc}
 %{uclibc_root}%{_libdir}/libldetect.a
+%{uclibc_root}%{_libdir}/*.so
 %endif
 %{_libdir}/*.so
