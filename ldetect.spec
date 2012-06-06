@@ -84,7 +84,7 @@ pushd uclibc
 popd
 %endif
 
-%make
+%make CFLAGS="%{optflags} -Os" LDFLAGS="%{?ldflags}"
 
 %install
 %makeinstall
