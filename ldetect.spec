@@ -60,6 +60,9 @@ see %{name}
 Group:		Development/C
 Summary:	Development package for ldetect
 Requires:	%{libname} = %{EVRD}
+%if %{with uclibc}
+Requires:	uclibc-%{libname} = %{EVRD}
+%endif
 Provides:	ldetect-devel = %{EVRD}
 
 %description -n %{devname}
