@@ -50,7 +50,7 @@ Group:		System/Libraries
 Requires:	ldetect-lst
 Requires:	pciids
 
-%description -n %{libname}
+%description -n uclibc-%{libname}
 see %{name}
 %endif
 
