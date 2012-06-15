@@ -1,6 +1,4 @@
 # EDIT IN SVN NOT IN SOURCE PACKAGE (NO PATCH ALLOWED).
-%define Werror_cflags %nil
-
 %define	major	0.12
 %define	minor	3
 %define	libname	%mklibname %{name} %{major}
