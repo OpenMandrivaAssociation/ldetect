@@ -9,7 +9,7 @@
 
 Name:		ldetect
 Version:	%{major}.%{minor}
-Release:	1
+Release:	2
 Summary:	Light hardware detection tool
 Group:		System/Kernel and hardware
 License:	GPLv2+
@@ -86,17 +86,17 @@ popd
 %build
 %if %{with diet}
 pushd diet
-%make CFLAGS="-Os -D_BSD_SOURCE -D_FILE_OFFSET_BITS=64" CC="diet gcc" libldetect.a
+%make CFLAGS="-Os -D_BSD_SOURCE -D_FILE_OFFSET_BITS=64 -fvisibility=hidden" CC="diet gcc" libldetect.a
 popd
 %endif
 
 %if %{with uclibc}
 pushd uclibc
-%make CFLAGS="%{uclibc_cflags}" LDFLAGS="%{?ldflags}" CC="%{uclibc_cc}"
+%make CFLAGS="%{uclibc_cflags} -fvisibility=hidden" LDFLAGS="%{?ldflags}" CC="%{uclibc_cc}"
 popd
 %endif
 
-%make CFLAGS="%{optflags} -Os" LDFLAGS="%{?ldflags}"
+%make CFLAGS="%{optflags} -Os -fvisibility=hidden" LDFLAGS="%{?ldflags}"
 
 %install
 %makeinstall
