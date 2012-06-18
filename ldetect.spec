@@ -86,13 +86,13 @@ popd
 %build
 %if %{with diet}
 pushd diet
-%make CFLAGS="-Os -D_BSD_SOURCE -D_FILE_OFFSET_BITS=64 -fvisibility=hidden" CC="diet gcc" libldetect.a
+%make CFLAGS="-Os -D_BSD_SOURCE -D_FILE_OFFSET_BITS=64 -fvisibility=hidden" CC="diet gcc" libldetect.a ZLIB=0
 popd
 %endif
 
 %if %{with uclibc}
 pushd uclibc
-%make CFLAGS="%{uclibc_cflags} -fvisibility=hidden" LDFLAGS="%{?ldflags}" CC="%{uclibc_cc}"
+%make CFLAGS="%{uclibc_cflags} -fvisibility=hidden" LDFLAGS="%{?ldflags}" CC="%{uclibc_cc}" ZLIB=0
 popd
 %endif
 
