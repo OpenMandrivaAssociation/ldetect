@@ -30,6 +30,16 @@ BuildRequires:	uClibc-devel
 The hardware device lists provided by this package are used as a lookup 
 table to get hardware auto-detection.
 
+%if %{with uclibc}
+%package -n	uclibc-%{name}
+Summary:	Light hardware detection tool
+Group:		System/Kernel and hardware
+
+%description -n	uclibc-%{name}
+The hardware device lists provided by this package are used as a lookup 
+table to get hardware auto-detection.
+%endif
+
 %package -n	%{libname}
 Summary:	Light hardware detection library
 Group:		System/Libraries
@@ -106,11 +116,16 @@ install -m644 diet/libldetect.a -D %{buildroot}%{_prefix}/lib/dietlibc/lib-%{_ar
 %if %{with uclibc}
 install -m644 uclibc/libldetect.a -D %{buildroot}%{uclibc_root}%{_libdir}/libldetect.a
 cp -a uclibc/libldetect.so* %{buildroot}%{uclibc_root}%{_libdir}/
+install -m755 uclibc/lspcidrake -D %{buildroot}%{uclibc_root}%{_bindir}/lspcidrake
 %endif
 
 %files
 %doc AUTHORS
-%{_bindir}/*
+%{_bindir}/lspcidrake
+
+%files -n uclibc-%{name}
+%doc AUTHORS
+%{uclibc_root}%{_bindir}/lspcidrake
 
 %files -n %{libname}
 %{_libdir}/*.so.%{major}
