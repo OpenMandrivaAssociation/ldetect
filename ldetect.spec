@@ -29,7 +29,7 @@ table to get hardware auto-detection.
 
 %if %{with uclibc}
 %package -n	uclibc-%{name}
-Summary:	Light hardware detection tool
+Summary:	Light hardware detection tool (uClibc build)
 Group:		System/Kernel and hardware
 
 %description -n	uclibc-%{name}
@@ -48,7 +48,7 @@ Requires:	pciids
 Conflicts:	%{mklibname pci 3} < 3.1.4-3mdv2010.0
 
 %description -n %{libname}
-see %{name}
+See %{name}.
 
 %if %{with uclibc}
 %package -n	uclibc-%{libname}
@@ -58,7 +58,7 @@ Requires:	ldetect-lst
 Requires:	pciids
 
 %description -n uclibc-%{libname}
-see %{name}
+See %{name}.
 %endif
 
 %package -n	%{devname}
@@ -71,7 +71,7 @@ Requires:	uclibc-%{libname} = %{EVRD}
 Provides:	ldetect-devel = %{EVRD}
 
 %description -n %{devname}
-see %{name}
+See %{name}.
 
 %prep
 %setup -q
@@ -112,24 +112,24 @@ install -m755 uclibc/lspcidrake -D %{buildroot}%{uclibc_root}%{_bindir}/lspcidra
 %endif
 
 %files -n %{libname}
-%{_libdir}/*.so.%{major}
-%{_libdir}/*.so.%{major}.%{minor}
+%{_libdir}/libldetect.so.%{major}
+%{_libdir}/libldetect.so.%{major}.%{minor}
 
 %if %{with uclibc}
 %files -n uclibc-%{libname}
-%{uclibc_root}%{_libdir}/*.so.%{major}
-%{uclibc_root}%{_libdir}/*.so.%{major}.%{minor}
+%{uclibc_root}%{_libdir}/libldetect.so.%{major}
+%{uclibc_root}%{_libdir}/libldetect.so.%{major}.%{minor}
 %endif
 
 %files -n %{devname}
 %doc ChangeLog
 %{_includedir}/*
-%{_libdir}/*.a
+%{_libdir}/libldetect.a
 %if %{with uclibc}
 %{uclibc_root}%{_libdir}/libldetect.a
-%{uclibc_root}%{_libdir}/*.so
+%{uclibc_root}%{_libdir}/libldetect.so
 %endif
-%{_libdir}/*.so
+%{_libdir}/libldetect.so
 
 %changelog
 * Mon Jan 7 2013 Per Øyvind Karlsen <peroyvind@mandriva.org> 0.13.0-1
