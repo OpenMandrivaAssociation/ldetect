@@ -73,6 +73,13 @@ Provides:	ldetect-devel = %{EVRD}
 %description -n %{devname}
 See %{name}.
 
+%package -n	perl-LDetect
+Group:		Development/Perl
+Summary:	Perl module for ldetect
+
+%description -n	perl-LDetect
+This package provides a perl module for using the ldetect library.
+
 %prep
 %setup -q
 
@@ -93,6 +100,11 @@ popd
 
 %make CXXFLAGS="%{optflags} -Os -fvisibility=hidden" LDFLAGS="%{?ldflags}"
 
+pushd perl
+perl Makefile.PL INSTALLDIRS=vendor OPTIMIZE="%{optflags} -Os"
+%make
+popd
+
 %install
 %makeinstall
 %if %{with uclibc}
@@ -100,6 +112,8 @@ install -m644 uclibc/libldetect.a -D %{buildroot}%{uclibc_root}%{_libdir}/liblde
 cp -a uclibc/libldetect.so* %{buildroot}%{uclibc_root}%{_libdir}/
 install -m755 uclibc/lspcidrake -D %{buildroot}%{uclibc_root}%{_bindir}/lspcidrake
 %endif
+
+%makeinstall_std -C perl
 
 %files
 %doc AUTHORS
@@ -132,6 +146,11 @@ install -m755 uclibc/lspcidrake -D %{buildroot}%{uclibc_root}%{_bindir}/lspcidra
 %{uclibc_root}%{_libdir}/libldetect.so
 %endif
 %{_libdir}/libldetect.so
+
+%files -n perl-LDetect
+%{perl_vendorarch}/LDetect.pm
+%dir %{perl_vendorarch}/auto/LDetect
+%{perl_vendorarch}/auto/LDetect/LDetect.so
 
 %changelog
 * Mon Jan 7 2013 Per Øyvind Karlsen <peroyvind@mandriva.org> 0.13.0-1
