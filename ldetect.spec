@@ -86,7 +86,8 @@ popd
 %build
 %if %{with uclibc}
 pushd uclibc
-%make CXXFLAGS="%{uclibc_cflags} -fvisibility=hidden" LDFLAGS="%{?ldflags}" LIBC=uclibc
+# XXX: lto1: internal compiler error: in should_move_die_to_comdat, at dwarf2out.c:6974
+%make CXXFLAGS="%{uclibc_cflags} -fvisibility=hidden" LDFLAGS="%{?ldflags}" LIBC=uclibc WHOLE_PROGRAM=0
 popd
 %endif
 
@@ -132,6 +133,7 @@ install -m755 uclibc/lspcidrake -D %{buildroot}%{uclibc_root}%{_bindir}/lspcidra
 
 %changelog
 * Mon Jan 7 2013 Per Øyvind Karlsen <peroyvind@mandriva.org> 0.13.0-1
+- disable -fwhole-program for uclibc build as compiler currently breaks with it
 - reenable zlib support for uclibc build
 - drop no longer supported dietlibc build
 - switch back from mageia fork to latest version from upstream:
