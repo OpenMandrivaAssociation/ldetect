@@ -139,6 +139,7 @@ install -m755 uclibc/lspcidrake -D %{buildroot}%{uclibc_root}%{_bindir}/lspcidra
 - reenable zlib support for uclibc build
 - drop no longer supported dietlibc build
 - switch back from mageia fork to latest version from upstream:
+	o bump max devices number per bus from 100 to 300 (mga#8320) 
 	o add pkgconfig file
 	o install headers into dedicated directory
 	o move functions from drakx perl module into a dedicated ldetect perl
