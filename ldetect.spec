@@ -125,6 +125,7 @@ install -m755 uclibc/lspcidrake -D %{buildroot}%{uclibc_root}%{_bindir}/lspcidra
 %doc ChangeLog
 %dir %{_includedir}/ldetect
 %{_includedir}/ldetect/*.h
+%{_libdir}/pkgconfig/ldetect.pc
 %{_libdir}/libldetect.a
 %if %{with uclibc}
 %{uclibc_root}%{_libdir}/libldetect.a
