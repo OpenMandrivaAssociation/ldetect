@@ -123,7 +123,8 @@ install -m755 uclibc/lspcidrake -D %{buildroot}%{uclibc_root}%{_bindir}/lspcidra
 
 %files -n %{devname}
 %doc ChangeLog
-%{_includedir}/*
+%dir %{_includedir}/ldetect
+%{_includedir}/ldetect/*.h
 %{_libdir}/libldetect.a
 %if %{with uclibc}
 %{uclibc_root}%{_libdir}/libldetect.a
@@ -137,6 +138,7 @@ install -m755 uclibc/lspcidrake -D %{buildroot}%{uclibc_root}%{_bindir}/lspcidra
 - reenable zlib support for uclibc build
 - drop no longer supported dietlibc build
 - switch back from mageia fork to latest version from upstream:
+	o install headers into dedicated directory
 	o move functions from drakx perl module into a dedicated ldetect perl
 	  module so that it'll be easier to maintain and also since no stable
 	  API nor ABI can be expected in any near future
