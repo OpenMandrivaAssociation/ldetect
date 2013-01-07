@@ -1,6 +1,6 @@
-# EDIT IN SVN NOT IN SOURCE PACKAGE (NO PATCH ALLOWED).
-%define	major	0.12
-%define	minor	6
+# EDIT IN GIT NOT IN SOURCE PACKAGE (NO PATCH ALLOWED).
+%define	major	0.13
+%define	minor	0
 %define	libname	%mklibname %{name} %{major}
 %define	devname	%mklibname %{name} -d
 
@@ -9,21 +9,22 @@
 
 Name:		ldetect
 Version:	%{major}.%{minor}
-Release:	2
+Release:	1
 Summary:	Light hardware detection tool
 Group:		System/Kernel and hardware
 License:	GPLv2+
-URL:		https://abf.rosalinux.ru/soft/ldetect
+URL:		https://abf.rosalinux.ru/proyvind/ldetect
 Source0:	%{name}-%{version}.tar.xz
 BuildRequires:	usbutils
 BuildRequires:	pkgconfig(libkmod)
 BuildRequires:	pkgconfig(libpci)
 BuildRequires:	pkgconfig(zlib)
+BuildRequires:	pkgconfig(liblzma)
 %if %{with diet}
 BuildRequires:	dietlibc-devel
 %endif
 %if %{with uclibc}
-BuildRequires:	uClibc-devel
+BuildRequires:	uClibc++-devel
 %endif
 
 %description
@@ -153,6 +154,16 @@ install -m755 uclibc/lspcidrake -D %{buildroot}%{uclibc_root}%{_bindir}/lspcidra
 %{_libdir}/*.so
 
 %changelog
+* Mon Jan 7 2013 Per Øyvind Karlsen <peroyvind@mandriva.org> 0.13.0-1
+- switch back from mageia fork to latest version from upstream:
+	o move functions from drakx perl module into a dedicated ldetect perl
+	  module so that it'll be easier to maintain and also since no stable
+	  API nor ABI can be expected in any near future
+	o implement a C++ stream class for zlib
+	o use names from dmi rather than the patterns matched against
+	o store names of pci classes in a hash map for faster lookups
+	o rewrite in C++
+
 * Tue Oct 4 2012 Alexander Kazancev <kazancas@mandriva.org> 0.12.5-1
 - Change sync from Mageia 
 - make ldetect 3x faster (and even faster on machines quite quite a lot
