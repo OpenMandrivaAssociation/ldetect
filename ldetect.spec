@@ -168,9 +168,9 @@ poke in /sys/kernel/debug/usb/devices instead of /proc/bus/usb/devices
 - package uclibc build of lspcidrake
 - zlib & lzma support is disabled for dietlibc & uclibc builds
 - new version:
-  	o add support for building with -fwhole-program and use it by default
-  	o fix generated usbclass.c & pciclass.c to have functions matching
-  	  their prototypes
+	o add support for building with -fwhole-program and use it by default
+	o fix generated usbclass.c & pciclass.c to have functions matching
+	  their prototypes
 
 * Sat Jun 16 2012 Per Øyvind Karlsen <peroyvind@mandriva.org> 0.12.3-2
 + Revision: 806008
@@ -185,8 +185,8 @@ poke in /sys/kernel/debug/usb/devices instead of /proc/bus/usb/devices
 - build with %%optflags %% ldflags
 - handle building of uclibc & dietlibc libraries better
 - new version:
-  	o replace deprecated kmod_module_get_filtered_blacklist()
-  	o add support for building without zlib support
+	o replace deprecated kmod_module_get_filtered_blacklist()
+	o add support for building without zlib support
 
 * Tue May 22 2012 Per Øyvind Karlsen <peroyvind@mandriva.org> 0.12.2-1
 + Revision: 800059
