@@ -86,11 +86,11 @@ popd
 %build
 %if %{with uclibc}
 pushd uclibc
-%make CFLAGS="%{uclibc_cflags} -fvisibility=hidden" LDFLAGS="%{?ldflags}" CC="%{uclibc_cc}"
+%make CXXFLAGS="%{uclibc_cflags} -fvisibility=hidden" LDFLAGS="%{?ldflags}" LIBC=uclibc
 popd
 %endif
 
-%make CFLAGS="%{optflags} -Os -fvisibility=hidden" LDFLAGS="%{?ldflags}"
+%make CXXFLAGS="%{optflags} -Os -fvisibility=hidden" LDFLAGS="%{?ldflags}"
 
 %install
 %makeinstall
