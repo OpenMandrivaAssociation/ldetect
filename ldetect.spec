@@ -138,6 +138,7 @@ install -m755 uclibc/lspcidrake -D %{buildroot}%{uclibc_root}%{_bindir}/lspcidra
 - reenable zlib support for uclibc build
 - drop no longer supported dietlibc build
 - switch back from mageia fork to latest version from upstream:
+	o add pkgconfig file
 	o install headers into dedicated directory
 	o move functions from drakx perl module into a dedicated ldetect perl
 	  module so that it'll be easier to maintain and also since no stable
