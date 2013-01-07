@@ -18,7 +18,6 @@ BuildRequires:	usbutils
 BuildRequires:	pkgconfig(libkmod)
 BuildRequires:	pkgconfig(libpci)
 BuildRequires:	pkgconfig(zlib)
-BuildRequires:	pkgconfig(liblzma)
 %if %{with uclibc}
 BuildRequires:	uClibc++-devel
 %endif
