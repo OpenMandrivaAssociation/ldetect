@@ -4,7 +4,6 @@
 %define	libname	%mklibname %{name} %{major}
 %define	devname	%mklibname %{name} -d
 
-%bcond_without	diet
 %bcond_without	uclibc
 
 Name:		ldetect
@@ -20,9 +19,6 @@ BuildRequires:	pkgconfig(libkmod)
 BuildRequires:	pkgconfig(libpci)
 BuildRequires:	pkgconfig(zlib)
 BuildRequires:	pkgconfig(liblzma)
-%if %{with diet}
-BuildRequires:	dietlibc-devel
-%endif
 %if %{with uclibc}
 BuildRequires:	uClibc++-devel
 %endif
@@ -80,13 +76,6 @@ see %{name}
 %prep
 %setup -q
 
-%if %{with diet}
-mkdir -p diet
-pushd diet
-ln -s ../* .
-popd
-%endif
-
 %if %{with uclibc}
 mkdir -p uclibc
 pushd uclibc
@@ -95,12 +84,6 @@ popd
 %endif
 
 %build
-%if %{with diet}
-pushd diet
-%make CFLAGS="-Os -D_BSD_SOURCE -D_FILE_OFFSET_BITS=64 -fvisibility=hidden" CC="diet gcc" libldetect.a ZLIB=0
-popd
-%endif
-
 %if %{with uclibc}
 pushd uclibc
 %make CFLAGS="%{uclibc_cflags} -fvisibility=hidden" LDFLAGS="%{?ldflags}" CC="%{uclibc_cc}" ZLIB=0
@@ -111,9 +94,6 @@ popd
 
 %install
 %makeinstall
-%if %{with diet}
-install -m644 diet/libldetect.a -D %{buildroot}%{_prefix}/lib/dietlibc/lib-%{_arch}/libldetect.a
-%endif
 %if %{with uclibc}
 install -m644 uclibc/libldetect.a -D %{buildroot}%{uclibc_root}%{_libdir}/libldetect.a
 cp -a uclibc/libldetect.so* %{buildroot}%{uclibc_root}%{_libdir}/
@@ -144,9 +124,6 @@ install -m755 uclibc/lspcidrake -D %{buildroot}%{uclibc_root}%{_bindir}/lspcidra
 %doc ChangeLog
 %{_includedir}/*
 %{_libdir}/*.a
-%if %{with diet}
-%{_prefix}/lib/dietlibc/lib-%{_arch}/libldetect.a
-%endif
 %if %{with uclibc}
 %{uclibc_root}%{_libdir}/libldetect.a
 %{uclibc_root}%{_libdir}/*.so
@@ -155,6 +132,7 @@ install -m755 uclibc/lspcidrake -D %{buildroot}%{uclibc_root}%{_bindir}/lspcidra
 
 %changelog
 * Mon Jan 7 2013 Per Øyvind Karlsen <peroyvind@mandriva.org> 0.13.0-1
+- drop no longer supported dietlibc build
 - switch back from mageia fork to latest version from upstream:
 	o move functions from drakx perl module into a dedicated ldetect perl
 	  module so that it'll be easier to maintain and also since no stable
