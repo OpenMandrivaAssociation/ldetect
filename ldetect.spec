@@ -86,7 +86,7 @@ popd
 %build
 %if %{with uclibc}
 pushd uclibc
-%make CFLAGS="%{uclibc_cflags} -fvisibility=hidden" LDFLAGS="%{?ldflags}" CC="%{uclibc_cc}" ZLIB=0
+%make CFLAGS="%{uclibc_cflags} -fvisibility=hidden" LDFLAGS="%{?ldflags}" CC="%{uclibc_cc}"
 popd
 %endif
 
@@ -132,6 +132,7 @@ install -m755 uclibc/lspcidrake -D %{buildroot}%{uclibc_root}%{_bindir}/lspcidra
 
 %changelog
 * Mon Jan 7 2013 Per Øyvind Karlsen <peroyvind@mandriva.org> 0.13.0-1
+- reenable zlib support for uclibc build
 - drop no longer supported dietlibc build
 - switch back from mageia fork to latest version from upstream:
 	o move functions from drakx perl module into a dedicated ldetect perl
