@@ -8,7 +8,7 @@
 
 Name:		ldetect
 Version:	%{major}.%{minor}
-Release:	1
+Release:	2
 Summary:	Light hardware detection tool
 Group:		System/Kernel and hardware
 License:	GPLv2+
@@ -18,6 +18,7 @@ BuildRequires:	usbutils
 BuildRequires:	pkgconfig(libkmod)
 BuildRequires:	pkgconfig(libpci)
 BuildRequires:	pkgconfig(zlib)
+BuildRequires:	sysfsutils-devel
 %if %{with uclibc}
 BuildRequires:	uClibc++-devel
 %endif
