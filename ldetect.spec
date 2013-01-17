@@ -15,7 +15,7 @@ License:	GPLv2+
 URL:		https://abf.rosalinux.ru/proyvind/ldetect
 Source0:	%{name}-%{version}.tar.xz
 BuildRequires:	usbutils
-BuildRequires:	perl(JSON::PP)
+BuildRequires:	perl-devel
 BuildRequires:	pkgconfig(libkmod)
 BuildRequires:	pkgconfig(libpci)
 BuildRequires:	pkgconfig(zlib)
