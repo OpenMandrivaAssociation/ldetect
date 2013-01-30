@@ -1,6 +1,6 @@
 # EDIT IN GIT NOT IN SOURCE PACKAGE (NO PATCH ALLOWED).
 %define	major	0.13
-%define	minor	0
+%define	minor	2
 %define	libname	%mklibname %{name} %{major}
 %define	devname	%mklibname %{name} -d
 
@@ -19,7 +19,6 @@ BuildRequires:	perl-devel
 BuildRequires:	pkgconfig(libkmod)
 BuildRequires:	pkgconfig(libpci)
 BuildRequires:	pkgconfig(zlib)
-BuildRequires:	sysfsutils-devel
 %if %{with uclibc}
 BuildRequires:	uClibc++-devel
 %endif
@@ -154,7 +153,25 @@ install -m755 uclibc/lspcidrake -D %{buildroot}%{uclibc_root}%{_bindir}/lspcidra
 %{perl_vendorarch}/auto/LDetect/LDetect.so
 
 %changelog
-* Mon Jan 7 2013 Per Øyvind Karlsen <peroyvind@mandriva.org> 0.13.0-1
+* Wed Jan 31 2013 Per Øyvind Karlsen <peroyvind@mandriva.org> 0.13.1-1
+- new version:
+	o various minor bug fixes & refactoring
+	o fix minor memleak
+	o make template implementations etc. internal
+	o use std::map for usbNames, yielding a ~36% performance increase
+	  (libstdc++ only, using uClibc++'s std::map implementation suffers
+	  insane performance hit, so stick to old C implementation for now...)
+	o reduce size quite a bit by dropping unused functionality from
+	  usbNames class
+	o rename intf 'class' to 'interface'
+	o rewrite names.{h,cpp} into a proper C++ 'usbNames' class
+	o move more stuff into common classes with common interfaces
+	o kill error_and_die()
+	o also check return value of ifstream::eof() as ifstream::getline() has
+	  different behaviour for return value in uClibc++
+	o work around broken implementation of ostream fill & setw in uClibc++
+
+* Mon Jan  7 2013 Per Øyvind Karlsen <peroyvind@mandriva.org> 0.13.0-1
 - disable -fwhole-program for uclibc build as compiler currently breaks with it
 - reenable zlib support for uclibc build
 - drop no longer supported dietlibc build
