@@ -98,7 +98,7 @@ pushd uclibc
 popd
 %endif
 
-%make CXXFLAGS="%{optflags} -Os -fvisibility=hidden" LDFLAGS="%{?ldflags}"
+%make CXXFLAGS="%{optflags} -Os -fvisibility=hidden" LDFLAGS="%{?ldflags}" WHOLE_PROGRAM=0
 
 pushd perl
 perl Makefile.PL INSTALLDIRS=vendor OPTIMIZE="%{optflags} -Os"
