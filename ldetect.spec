@@ -1,6 +1,6 @@
 # EDIT IN GIT NOT IN SOURCE PACKAGE (NO PATCH ALLOWED).
 %define	major	0.13
-%define	minor	1
+%define	minor	2
 %define	libname	%mklibname %{name} %{major}
 %define	devname	%mklibname %{name} -d
 
@@ -94,11 +94,11 @@ popd
 %if %{with uclibc}
 pushd uclibc
 # XXX: lto1: internal compiler error: in should_move_die_to_comdat, at dwarf2out.c:6974
-%make CXXFLAGS="%{uclibc_cflags} -fvisibility=hidden" LDFLAGS="%{?ldflags}" LIBC=uclibc WHOLE_PROGRAM=0
+%make OPTFLAGS="%{uclibc_cflags}" LDFLAGS="%{?ldflags}" LIBC=uclibc WHOLE_PROGRAM=0
 popd
 %endif
 
-%make CXXFLAGS="%{optflags} -Os -fvisibility=hidden" LDFLAGS="%{?ldflags}" WHOLE_PROGRAM=0
+%make OPTFLAGS="%{optflags} -Os" LDFLAGS="%{?ldflags}" WHOLE_PROGRAM=0
 
 pushd perl
 perl Makefile.PL INSTALLDIRS=vendor OPTIMIZE="%{optflags} -Os"
