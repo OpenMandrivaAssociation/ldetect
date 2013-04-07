@@ -1,6 +1,6 @@
 # EDIT IN GIT NOT IN SOURCE PACKAGE (NO PATCH ALLOWED).
 %define	major	0.13
-%define	minor	2
+%define	minor	3
 %define	libname	%mklibname %{name} %{major}
 %define	devname	%mklibname %{name} -d
 
@@ -8,7 +8,7 @@
 
 Name:		ldetect
 Version:	%{major}.%{minor}
-Release:	2
+Release:	1
 Summary:	Light hardware detection tool
 Group:		System/Kernel and hardware
 License:	GPLv2+
@@ -153,6 +153,11 @@ install -m755 uclibc/lspcidrake -D %{buildroot}%{uclibc_root}%{_bindir}/lspcidra
 %{perl_vendorarch}/auto/LDetect/LDetect.so
 
 %changelog
+* Sun Apr  7 2013 Per Øyvind Karlsen <peroyvind@mandriva.org> 0.13.1-1
+- new version:
+	o fix detection of HID devices
+	o always display kernel modules for devices
+ 
 * Wed Jan 31 2013 Per Øyvind Karlsen <peroyvind@mandriva.org> 0.13.1-1
 - new version:
 	o various minor bug fixes & refactoring
