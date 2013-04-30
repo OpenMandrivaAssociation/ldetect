@@ -106,7 +106,7 @@ perl Makefile.PL INSTALLDIRS=vendor OPTIMIZE="%{optflags} -Os"
 popd
 
 %install
-%makeinstall
+%makeinstall_std lib=%{_lib}
 %if %{with uclibc}
 install -m644 uclibc/libldetect.a -D %{buildroot}%{uclibc_root}%{_libdir}/libldetect.a
 cp -a uclibc/libldetect.so* %{buildroot}%{uclibc_root}%{_libdir}/
