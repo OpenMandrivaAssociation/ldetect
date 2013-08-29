@@ -82,6 +82,10 @@ This package provides a perl module for using the ldetect library.
 
 %prep
 %setup -q
+%apply_patches
+%ifarch %arm aarch64
+sed -i 's/-fwhole-program//g' Makefile
+%endif
 
 %if %{with uclibc}
 mkdir -p uclibc
