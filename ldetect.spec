@@ -8,13 +8,14 @@
 
 Name:		ldetect
 Version:	%{major}.%{minor}
-Release:	5
+Release:	6
 Summary:	Light hardware detection tool
 Group:		System/Kernel and hardware
 License:	GPLv2+
-URL:		https://abf.rosalinux.ru/moondrake/ldetect
+URL:		https://abf.rosalinux.ru/omv_software/ldetect
 Source0:	%{name}-%{version}.tar.xz
 Patch1:		ldetect-0.13.4-modules.patch
+Patch2:		ldetect-0.13.4-sys_driver.patch
 BuildRequires:	usbutils
 BuildRequires:	perl-devel
 BuildRequires:	pkgconfig(libkmod)
