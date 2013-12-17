@@ -22,7 +22,7 @@
 +              buf[n] = 0;
 +
 +            char* drv;
-+            if (drv = strrchr(buf, '/'))
++            if ((drv = strrchr(buf, '/')))
 +              e.module = drv +1;
 +            else
 +              e.module = buf;
