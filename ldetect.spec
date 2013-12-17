@@ -1,14 +1,14 @@
 # EDIT IN GIT NOT IN SOURCE PACKAGE (NO PATCH ALLOWED).
-%define	major	0.13
-%define	minor	4
-%define	libname	%mklibname %{name} %{major}
-%define	devname	%mklibname %{name} -d
+%define major 0.13
+%define minor 4
+%define libname %mklibname %{name} %{major}
+%define devname %mklibname %{name} -d
 
 %bcond_without	uclibc
 
 Name:		ldetect
 Version:	%{major}.%{minor}
-Release:	6
+Release:	7
 Summary:	Light hardware detection tool
 Group:		System/Kernel and hardware
 License:	GPLv2+
