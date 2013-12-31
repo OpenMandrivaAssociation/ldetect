@@ -15,7 +15,7 @@
 -	    std::ifstream f(std::string("/sys/bus/pci/devices/").append(devname.str()).append("/modalias").c_str());
 +            std::string sysDir = std::string("/sys/bus/pci/devices/").append(devname.str());
 +            char buf[1024];
-+            ssize_t n = readlink(sysDir.append("/driver").c_str(), buf, 1024);
++            ssize_t n = readlink(std::string(sysDir + "/driver").c_str(), buf, sizeof(buf));
 +            if(n < 0)
 +              buf[0] = 0;
 +            else 
