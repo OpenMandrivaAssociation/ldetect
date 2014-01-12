@@ -1,6 +1,6 @@
 # EDIT IN GIT NOT IN SOURCE PACKAGE (NO PATCH ALLOWED).
 %define	major	0.13
-%define	minor	7
+%define	minor	8
 %define	libname	%mklibname %{name} %{major}
 %define	devname	%mklibname %{name} -d
 
