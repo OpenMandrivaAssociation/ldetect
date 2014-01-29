@@ -1,6 +1,6 @@
 # EDIT IN GIT NOT IN SOURCE PACKAGE (NO PATCH ALLOWED).
 %define	major	0.13
-%define	minor	8
+%define	minor	9
 %define	libname	%mklibname %{name} %{major}
 %define	devname	%mklibname %{name} -d
 
@@ -12,7 +12,7 @@ Release:	1
 Summary:	Light hardware detection tool
 Group:		System/Kernel and hardware
 License:	GPLv2+
-URL:		https://abf.rosalinux.ru/moondrake/ldetect
+URL:		https://abf.rosalinux.ru/mdksoft/ldetect
 Source0:	%{name}-%{version}.tar.xz
 BuildRequires:	usbutils
 BuildRequires:	perl-devel
