@@ -6,6 +6,12 @@
 
 %bcond_without	uclibc
 
+%ifnarch %{arm} aarch64
+%global whoprog	1
+%else
+%global whoprog	0
+%endif
+
 Name:		ldetect
 Version:	%{major}.%{minor}
 Release:	1
@@ -97,11 +103,11 @@ popd
 %if %{with uclibc}
 pushd uclibc
 # XXX: lto1: internal compiler error: in should_move_die_to_comdat, at dwarf2out.c:6974
-%make OPTFLAGS="%{uclibc_cflags} -gdwarf-3" LDFLAGS="%{?ldflags}" LIBC=uclibc WHOLE_PROGRAM=1
+%make OPTFLAGS="%{uclibc_cflags} -gdwarf-3" LDFLAGS="%{?ldflags}" LIBC=uclibc WHOLE_PROGRAM=%{whoprog}
 popd
 %endif
 
-%make OPTFLAGS="%{optflags} -Os -gdwarf-3" LDFLAGS="%{?ldflags}" WHOLE_PROGRAM=1
+%make OPTFLAGS="%{optflags} -Os -gdwarf-3" LDFLAGS="%{?ldflags}" WHOLE_PROGRAM=%{whoprog}
 
 pushd perl
 perl Makefile.PL INSTALLDIRS=vendor OPTIMIZE="%{optflags} -Os"
