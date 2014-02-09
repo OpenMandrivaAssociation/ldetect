@@ -1,21 +1,25 @@
 # EDIT IN GIT NOT IN SOURCE PACKAGE (NO PATCH ALLOWED).
-%define major 0.13
-%define minor 4
-%define libname %mklibname %{name} %{major}
-%define devname %mklibname %{name} -d
+%define	major	0.13
+%define	minor	9
+%define	libname	%mklibname %{name} %{major}
+%define	devname	%mklibname %{name} -d
 
 %bcond_without	uclibc
 
+%ifnarch %{arm} aarch64
+%global whoprog	1
+%else
+%global whoprog	0
+%endif
+
 Name:		ldetect
 Version:	%{major}.%{minor}
-Release:	13
+Release:	1
 Summary:	Light hardware detection tool
 Group:		System/Kernel and hardware
 License:	GPLv2+
-URL:		https://abf.rosalinux.ru/omv_software/ldetect
+URL:		https://abf.rosalinux.ru/mdksoft/ldetect
 Source0:	%{name}-%{version}.tar.xz
-Patch1:		ldetect-0.13.4-modules.patch
-Patch2:		ldetect-0.13.4-sys_driver.patch
 BuildRequires:	usbutils
 BuildRequires:	perl-devel
 BuildRequires:	pkgconfig(libkmod)
@@ -84,7 +88,6 @@ This package provides a perl module for using the ldetect library.
 
 %prep
 %setup -q
-%apply_patches
 %ifarch %arm aarch64
 sed -i 's/-fwhole-program//g' Makefile
 %endif
@@ -100,11 +103,11 @@ popd
 %if %{with uclibc}
 pushd uclibc
 # XXX: lto1: internal compiler error: in should_move_die_to_comdat, at dwarf2out.c:6974
-%make OPTFLAGS="%{uclibc_cflags} -gdwarf-3" LDFLAGS="%{?ldflags}" LIBC=uclibc WHOLE_PROGRAM=1
+%make OPTFLAGS="%{uclibc_cflags} -gdwarf-3" LDFLAGS="%{?ldflags}" LIBC=uclibc WHOLE_PROGRAM=%{whoprog}
 popd
 %endif
 
-%make OPTFLAGS="%{optflags} -Os -gdwarf-3" LDFLAGS="%{?ldflags}" WHOLE_PROGRAM=1
+%make OPTFLAGS="%{optflags} -Os -gdwarf-3" LDFLAGS="%{?ldflags}" WHOLE_PROGRAM=%{whoprog}
 
 pushd perl
 perl Makefile.PL INSTALLDIRS=vendor OPTIMIZE="%{optflags} -Os"
@@ -112,7 +115,7 @@ perl Makefile.PL INSTALLDIRS=vendor OPTIMIZE="%{optflags} -Os"
 popd
 
 %install
-%makeinstall
+%makeinstall_std lib=%{_lib}
 %if %{with uclibc}
 install -m644 uclibc/libldetect.a -D %{buildroot}%{uclibc_root}%{_libdir}/libldetect.a
 cp -a uclibc/libldetect.so* %{buildroot}%{uclibc_root}%{_libdir}/
