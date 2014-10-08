@@ -6,7 +6,7 @@
 
 %bcond_without	uclibc
 
-%ifnarch %{arm} aarch64
+%ifnarch %{arm} aarch64 %{ix86} %{x86_64}
 %global whoprog	1
 %else
 %global whoprog	0
@@ -14,7 +14,7 @@
 
 Name:		ldetect
 Version:	%{major}.%{minor}
-Release:	3
+Release:	4
 Summary:	Light hardware detection tool
 Group:		System/Kernel and hardware
 License:	GPLv2+
@@ -88,7 +88,7 @@ This package provides a perl module for using the ldetect library.
 
 %prep
 %setup -q
-%ifarch %arm aarch64
+%ifarch %arm aarch64 %{ix86} %{x86_64}
 sed -i 's/-fwhole-program//g' Makefile
 %endif
 
@@ -107,10 +107,10 @@ pushd uclibc
 popd
 %endif
 
-%make OPTFLAGS="%{optflags} -Os -gdwarf-3" LDFLAGS="%{?ldflags}" WHOLE_PROGRAM=%{whoprog}
+%make OPTFLAGS="%{optflags} -gdwarf-3" LDFLAGS="%{?ldflags}" WHOLE_PROGRAM=%{whoprog}
 
 pushd perl
-perl Makefile.PL INSTALLDIRS=vendor OPTIMIZE="%{optflags} -Os"
+perl Makefile.PL INSTALLDIRS=vendor OPTIMIZE="%{optflags}"
 %make
 popd
 
