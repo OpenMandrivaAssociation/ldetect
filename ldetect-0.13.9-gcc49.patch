@@ -1,0 +1,62 @@
+diff -ur ldetect-0.13.9.orig/dmi.cpp ldetect-0.13.9/dmi.cpp
+--- ldetect-0.13.9.orig/dmi.cpp	2014-01-29 11:13:03.000000000 +0000
++++ ldetect-0.13.9/dmi.cpp	2014-10-09 06:47:58.669600855 +0100
+@@ -11,6 +11,10 @@
+ 
+ namespace ldetect {
+ 
++dmi::dmi() {}
++
++dmi::~dmi() {}
++
+ void dmi::probe(void)
+ {
+     struct dmiTable {
+Only in ldetect-0.13.9/: dmi.cpp~
+Only in ldetect-0.13.9/: .dmi.cpp.un~
+diff -ur ldetect-0.13.9.orig/dmi.h ldetect-0.13.9/dmi.h
+--- ldetect-0.13.9.orig/dmi.h	2014-01-29 11:13:03.000000000 +0000
++++ ldetect-0.13.9/dmi.h	2014-10-09 06:47:14.212604131 +0100
+@@ -10,7 +10,8 @@
+ namespace ldetect {
+     class dmi : public bus, public interface<entry> {
+ 	public:
+-	    dmi() EXPORTED {}
++	    dmi() EXPORTED ;
++	    ~dmi() EXPORTED;
+ 
+ 	    void probe(void) EXPORTED;
+     };
+Only in ldetect-0.13.9/: dmi.h~
+Only in ldetect-0.13.9/: .dmi.h.un~
+diff -ur ldetect-0.13.9.orig/hid.cpp ldetect-0.13.9/hid.cpp
+--- ldetect-0.13.9.orig/hid.cpp	2014-01-29 11:13:03.000000000 +0000
++++ ldetect-0.13.9/hid.cpp	2014-10-09 06:47:44.693601885 +0100
+@@ -11,6 +11,10 @@
+ 
+ namespace ldetect {
+ 
++hid::hid() {}
++
++hid::~hid() {}
++
+ void hid::probe(void)
+ {
+     const std::string hidDevs("/sys/bus/hid/devices/");
+Only in ldetect-0.13.9/: hid.cpp~
+Only in ldetect-0.13.9/: .hid.cpp.un~
+diff -ur ldetect-0.13.9.orig/hid.h ldetect-0.13.9/hid.h
+--- ldetect-0.13.9.orig/hid.h	2014-01-29 11:13:03.000000000 +0000
++++ ldetect-0.13.9/hid.h	2014-10-09 06:47:31.887602828 +0100
+@@ -16,7 +16,8 @@
+ 
+     class hid : public bus, public interface<entry> {
+ 	public:
+-	    hid() EXPORTED {}
++	    hid() EXPORTED;
++	    ~hid() EXPORTED;
+ 
+ 	    void probe(void) EXPORTED;
+     };
+Only in ldetect-0.13.9/: hid.h~
+Only in ldetect-0.13.9/: .hid.h.un~
