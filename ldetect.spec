@@ -6,10 +6,10 @@
 
 %bcond_without	uclibc
 
-%ifnarch %{arm} aarch64 %{ix86} %{x86_64}
-%global whoprog	1
-%else
+%ifarch aarch64
 %global whoprog	0
+%else
+%global whoprog	1
 %endif
 
 Name:		ldetect
