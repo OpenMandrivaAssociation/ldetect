@@ -14,7 +14,7 @@
 
 Name:		ldetect
 Version:	%{major}.%{minor}
-Release:	5
+Release:	1
 Summary:	Light hardware detection tool
 Group:		System/Kernel and hardware
 License:	GPLv2+
@@ -88,9 +88,6 @@ This package provides a perl module for using the ldetect library.
 
 %prep
 %setup -q
-%ifarch %arm aarch64 %{ix86} %{x86_64}
-sed -i 's/-fwhole-program//g' Makefile
-%endif
 
 %if %{with uclibc}
 mkdir -p uclibc
