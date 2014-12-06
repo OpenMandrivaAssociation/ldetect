@@ -1,6 +1,6 @@
 # EDIT IN GIT NOT IN SOURCE PACKAGE (NO PATCH ALLOWED).
 %define	major	0.13
-%define	minor	9
+%define	minor	10
 %define	libname	%mklibname %{name} %{major}
 %define	devname	%mklibname %{name} -d
 
@@ -18,9 +18,8 @@ Release:	5
 Summary:	Light hardware detection tool
 Group:		System/Kernel and hardware
 License:	GPLv2+
-URL:		https://abf.rosalinux.ru/mdksoft/ldetect
+URL:		https://abf.io/software/ldetect
 Source0:	%{name}-%{version}.tar.xz
-Patch1:		ldetect-0.13.9-gcc49.patch
 BuildRequires:	usbutils
 BuildRequires:	perl-devel
 BuildRequires:	pkgconfig(libkmod)
@@ -89,7 +88,6 @@ This package provides a perl module for using the ldetect library.
 
 %prep
 %setup -q
-%apply_patches
 %ifarch %arm aarch64 %{ix86} %{x86_64}
 sed -i 's/-fwhole-program//g' Makefile
 %endif
