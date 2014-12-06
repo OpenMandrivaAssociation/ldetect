@@ -100,11 +100,11 @@ popd
 %if %{with uclibc}
 pushd uclibc
 # XXX: lto1: internal compiler error: in should_move_die_to_comdat, at dwarf2out.c:6974
-%make OPTFLAGS="%{uclibc_cflags} -gdwarf-3" LDFLAGS="%{?ldflags}" LIBC=uclibc WHOLE_PROGRAM=%{whoprog}
+%make OPTFLAGS="%{uclibc_cflags}" LDFLAGS="%{?ldflags}" LIBC=uclibc WHOLE_PROGRAM=%{whoprog}
 popd
 %endif
 
-%make OPTFLAGS="%{optflags} -gdwarf-3" LDFLAGS="%{?ldflags}" WHOLE_PROGRAM=%{whoprog}
+%make OPTFLAGS="%{optflags}" LDFLAGS="%{?ldflags}" WHOLE_PROGRAM=%{whoprog}
 
 pushd perl
 perl Makefile.PL INSTALLDIRS=vendor OPTIMIZE="%{optflags}"
