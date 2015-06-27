@@ -27,6 +27,7 @@ BuildRequires:	pkgconfig(libpci)
 BuildRequires:	pkgconfig(zlib)
 %if %{with uclibc}
 BuildRequires:	uClibc++-devel
+BuildRequires:	uClibc-devel
 BuildRequires:	uclibc-kmod-devel
 BuildRequires:	uclibc-pciutils-devel
 BuildRequires:	uclibc-zlib-devel
