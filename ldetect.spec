@@ -14,7 +14,7 @@
 
 Name:		ldetect
 Version:	%{major}.%{minor}
-Release:	2
+Release:	3
 Summary:	Light hardware detection tool
 Group:		System/Kernel and hardware
 License:	GPLv2+
@@ -65,15 +65,23 @@ Requires:	pciids
 
 %description -n uclibc-%{libname}
 See %{name}.
+
+%package -n	uclibc-%{devname}
+Group:		Development/C
+Summary:	Development package for ldetect
+Requires:	%{devname} = %{EVRD}
+Requires:	uclibc-%{libname} = %{EVRD}
+Provides:	uclibc-ldetect-devel = %{EVRD}
+Conflicts:	%{devname} < 0.13.11-3
+
+%description -n uclibc-%{devname}
+See %{name}.
 %endif
 
 %package -n	%{devname}
 Group:		Development/C
 Summary:	Development package for ldetect
 Requires:	%{libname} = %{EVRD}
-%if %{with uclibc}
-Requires:	uclibc-%{libname} = %{EVRD}
-%endif
 Provides:	ldetect-devel = %{EVRD}
 
 %description -n %{devname}
@@ -145,6 +153,10 @@ LD_LIBRARY_PATH=`pwd` ./lspcidrake
 %files -n uclibc-%{libname}
 %{uclibc_root}%{_libdir}/libldetect.so.%{major}
 %{uclibc_root}%{_libdir}/libldetect.so.%{major}.%{minor}
+
+%files -n uclibc-%{devname}
+%{uclibc_root}%{_libdir}/libldetect.a
+%{uclibc_root}%{_libdir}/libldetect.so
 %endif
 
 %files -n %{devname}
@@ -153,10 +165,6 @@ LD_LIBRARY_PATH=`pwd` ./lspcidrake
 %{_includedir}/ldetect/*.h
 %{_libdir}/pkgconfig/ldetect.pc
 %{_libdir}/libldetect.a
-%if %{with uclibc}
-%{uclibc_root}%{_libdir}/libldetect.a
-%{uclibc_root}%{_libdir}/libldetect.so
-%endif
 %{_libdir}/libldetect.so
 
 %files -n perl-LDetect
