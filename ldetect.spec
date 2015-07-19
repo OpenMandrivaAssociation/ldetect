@@ -14,7 +14,7 @@
 
 Name:		ldetect
 Version:	%{major}.%{minor}
-Release:	3
+Release:	4
 Summary:	Light hardware detection tool
 Group:		System/Kernel and hardware
 License:	GPLv2+
