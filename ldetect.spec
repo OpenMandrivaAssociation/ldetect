@@ -4,7 +4,7 @@
 %define	libname	%mklibname %{name} %{major}
 %define	devname	%mklibname %{name} -d
 
-%bcond_without	uclibc
+%bcond_with	uclibc
 
 %ifarch aarch64
 %global whoprog	0
@@ -14,7 +14,7 @@
 
 Name:		ldetect
 Version:	%{major}.%{minor}
-Release:	4
+Release:	5
 Summary:	Light hardware detection tool
 Group:		System/Kernel and hardware
 License:	GPLv2+
