@@ -116,7 +116,7 @@ pushd uclibc
 popd
 %endif
 
-%make -j1 OPTFLAGS="%{optflags}" LDFLAGS="%{?ldflags}" WHOLE_PROGRAM=%{whoprog}
+%make INCLUDES="$(shell pkg-config --cflags libkmod libpci)" OPTFLAGS="%{optflags}" LDFLAGS="%{?ldflags}" WHOLE_PROGRAM=%{whoprog}
 
 pushd perl
 perl Makefile.PL INSTALLDIRS=vendor OPTIMIZE="%{optflags}"
