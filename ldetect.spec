@@ -116,7 +116,7 @@ pushd uclibc
 popd
 %endif
 
-%make OPTFLAGS="%{optflags}" LDFLAGS="%{?ldflags}" WHOLE_PROGRAM=%{whoprog}
+%make -j1 OPTFLAGS="%{optflags}" LDFLAGS="%{?ldflags}" WHOLE_PROGRAM=%{whoprog}
 
 pushd perl
 perl Makefile.PL INSTALLDIRS=vendor OPTIMIZE="%{optflags}"
