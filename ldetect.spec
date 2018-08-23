@@ -14,7 +14,7 @@
 
 Name:		ldetect
 Version:	%{major}.%{minor}
-Release:	10
+Release:	11
 Summary:	Light hardware detection tool
 Group:		System/Kernel and hardware
 License:	GPLv2+
@@ -50,7 +50,7 @@ table to get hardware auto-detection.
 %package -n	%{libname}
 Summary:	Light hardware detection library
 Group:		System/Libraries
-Requires:	ldetect-lst
+Requires:	hwdata
 Requires:	common-licenses
 Requires:	pciids
 # (tv) fix upgrade ordering (libpci3 needs to be updaded from 3.0 to 3.1 before ldetect is upgraded):
@@ -64,7 +64,7 @@ See %{name}.
 %package -n	uclibc-%{libname}
 Summary:	Light hardware detection library linked against uClibc
 Group:		System/Libraries
-Requires:	ldetect-lst
+Requires:	hwdata
 Requires:	pciids
 
 %description -n uclibc-%{libname}
