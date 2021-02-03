@@ -14,12 +14,13 @@
 
 Name:		ldetect
 Version:	%{major}.%{minor}
-Release:	11
+Release:	12
 Summary:	Light hardware detection tool
 Group:		System/Kernel and hardware
 License:	GPLv2+
 URL:		https://abf.io/software/ldetect
 Source0:	%{name}-%{version}.tar.xz
+Patch0:		ldetect-0.13.11-usb.ids-location.patch
 BuildRequires:	usbutils
 BuildRequires:	perl-devel
 BuildRequires:	pkgconfig(libkmod)
@@ -99,7 +100,7 @@ Summary:	Perl module for ldetect
 This package provides a perl module for using the ldetect library.
 
 %prep
-%setup -q
+%autosetup -p1
 
 %if %{with uclibc}
 mkdir -p uclibc
@@ -112,26 +113,26 @@ popd
 %if %{with uclibc}
 pushd uclibc
 # XXX: lto1: internal compiler error: in should_move_die_to_comdat, at dwarf2out.c:6974
-%make OPTFLAGS="%{uclibc_cflags}" LDFLAGS="%{?ldflags}" LIBC=uclibc WHOLE_PROGRAM=%{whoprog}
+%make_build OPTFLAGS="%{uclibc_cflags}" LDFLAGS="%{?ldflags}" LIBC=uclibc WHOLE_PROGRAM=%{whoprog}
 popd
 %endif
 
-%make INCLUDES="$(pkg-config --cflags libkmod libpci)" OPTFLAGS="%{optflags}" LDFLAGS="%{?ldflags}" WHOLE_PROGRAM=%{whoprog}
+%make_build INCLUDES="$(pkg-config --cflags libkmod libpci)" OPTFLAGS="%{optflags}" LDFLAGS="%{?ldflags}" WHOLE_PROGRAM=%{whoprog}
 
 pushd perl
 perl Makefile.PL INSTALLDIRS=vendor OPTIMIZE="%{optflags}"
-%make
+%make_build
 popd
 
 %install
-%makeinstall_std lib=%{_lib}
+%make_install lib=%{_lib}
 %if %{with uclibc}
 install -m644 uclibc/libldetect.a -D %{buildroot}%{uclibc_root}%{_libdir}/libldetect.a
 cp -a uclibc/libldetect.so* %{buildroot}%{uclibc_root}%{_libdir}/
 install -m755 uclibc/lspcidrake -D %{buildroot}%{uclibc_root}%{_bindir}/lspcidrake
 %endif
 
-%makeinstall_std -C perl
+%make_install -C perl
 
 %check
 %if ! %cross_compiling

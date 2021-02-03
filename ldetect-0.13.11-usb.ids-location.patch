@@ -1,0 +1,33 @@
+diff -up ldetect-0.13.11/Makefile.omv~ ldetect-0.13.11/Makefile
+--- ldetect-0.13.11/Makefile.omv~	2021-02-04 00:55:34.847545715 +0100
++++ ldetect-0.13.11/Makefile	2021-02-04 00:56:02.854134504 +0100
+@@ -13,7 +13,7 @@ WHOLE_FLAGS =
+ OPTFLAGS += -Oz
+ else
+ WHOLE_FLAGS = -fwhole-program
+-FLTO = -flto -fuse-linker-plugin
++FLTO = -flto
+ OPTFLAGS += -Os
+ endif
+ DEBUGFLAGS += -g
+@@ -140,7 +140,7 @@ $(ldetect_srcdir)/pciclass.cpp: $(ldetec
+ 	rm -f $@
+ 	python $(ldetect_srcdir)/generate_pciclass.py $@ $^
+ 
+-$(ldetect_srcdir)/usbclass.cpp: $(ldetect_srcdir)/generate_usbclass.pl /usr/share/usb.ids 
++$(ldetect_srcdir)/usbclass.cpp: $(ldetect_srcdir)/generate_usbclass.pl /usr/share/hwdata/usb.ids 
+ 	rm -f $@
+ 	perl $(ldetect_srcdir)/generate_usbclass.pl $^ > $@
+ 
+diff -up ldetect-0.13.11/usb.cpp.omv~ ldetect-0.13.11/usb.cpp
+--- ldetect-0.13.11/usb.cpp.omv~	2021-02-04 00:55:18.257591688 +0100
++++ ldetect-0.13.11/usb.cpp	2021-02-04 00:55:27.274233384 +0100
+@@ -26,7 +26,7 @@ std::ostream& operator<<(std::ostream& o
+     return os;
+ }
+ 
+-usb::usb() : _names("/usr/share/usb.ids") {
++usb::usb() : _names("/usr/share/hwdata/usb.ids") {
+ }
+ 
+ usb::~usb() {
