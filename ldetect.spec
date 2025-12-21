@@ -21,6 +21,7 @@ License:	GPLv2+
 URL:		https://abf.io/software/ldetect
 Source0:	%{name}-%{version}.tar.xz
 Patch0:		ldetect-0.13.11-usb.ids-location.patch
+BuildRequires:	make
 BuildRequires:	usbutils
 BuildRequires:	perl-devel
 BuildRequires:	pkgconfig(libkmod)
